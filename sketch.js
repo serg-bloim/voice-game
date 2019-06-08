@@ -53,5 +53,8 @@ function drawTop(){
 }
 
 function updateCursor() {
+  let volume = mic.getLevel();
+  let newHeight = map(volume, 0, 1, -90, 90);
 
+  block.pos.y = newHeight;
 }
