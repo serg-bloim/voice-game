@@ -21,12 +21,6 @@ function draw() {
     translate(width/2, height/2);
     scale(1,-1)
     scale(dimensions.width/200)
-    if (mouseIsPressed) {
-        fill(0);
-      } else {
-        fill(255);
-      }
-    //   ellipse(mouseX, mouseY, 80, 80);
       updateLvl();
       drawBottom()
       drawTop()
@@ -38,19 +32,15 @@ function drawCursor(){
     fill('#fae')
     ellipse(block.pos.x, block.pos.y, block.sizeX, block.sizeY);
 }
-function drawBorder(){
+function drawBorder(border){
     stroke('#DEB887')
     fill('#A52A2A')
     strokeWeight(2)
-    // translate(0,-height/2);
     translate(0,-100);
     beginShape()
     vertex(-110,0)
     vertex(-110,5)
     var lastX = 0;
-    var border = lvl.bottom;
-    // var arrStart = 0;
-    // var arrEnd = border.length;
     var level = 0.5;
     var offsetBackward = 1;
     var offsetForward = 2;
@@ -66,17 +56,17 @@ function drawBorder(){
     vertex(110, 5)
     vertex(110, 0)
     endShape()
-    translate(0,100);
-    // translate(0,height/2);
-    stroke(0)
-    strokeWeight(1)
 }
 function drawBottom(){
-  drawBorder();
+  push();
+  drawBorder(lvl.bottom);
+  pop();
 }
-
 function drawTop(){
-    
+  push();
+  scale(1,-1);
+  drawBorder(lvl.top);
+  pop();
 }
 
 function updateCursor() {
