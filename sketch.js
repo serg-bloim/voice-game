@@ -11,6 +11,7 @@ function setup() {
     createCanvas(dimensions.width, dimensions.height);
     mic = new p5.AudioIn();
     mic.start();
+    frameRate(30);
 }
 
 function draw() {
@@ -25,7 +26,7 @@ function draw() {
         fill(255);
       }
     //   ellipse(mouseX, mouseY, 80, 80);
-      
+      updateLvl();
       drawBottom()
       drawTop()
       updateCursor()
@@ -43,16 +44,26 @@ function drawBottom(){
     // translate(0,-height/2);
     translate(0,-100);
     beginShape()
-    vertex(0,0)
+    vertex(-110,0)
+    vertex(-110,5)
     var curLvl = 0.5;
     var lastX = 0;
-    for (x in lvl.bottom){
+    // var arrStart = constrain(lvlPos-10, 0, lvl.length-1);
+    // var arrEnd = constrain(lvlPos+10, 0, lvl.length);
+    var border = lvl.bottom;
+    var arrStart = 0;
+    var arrEnd = border.length;
+    var xStart = max(-lvlPos, -10)
+    for (i = arrStart; i < arrEnd; i++){
+        var x = i
         lastX = x+1;
-        var y = lvl.bottom[x];
+        var y = border[x];
         curLvl += y
-        vertex(x*10, curLvl*10);
+        vertex((x-lvlPos)*10, curLvl*10);
     }
-    vertex(lastX*10, 0)
+    vertex(lastX*10, 5)
+    vertex(110, 5)
+    vertex(110, 0)
     endShape()
     translate(0,100);
     // translate(0,height/2);
@@ -72,4 +83,8 @@ function updateCursor() {
 
 function touchStarted() {
   getAudioContext().resume()
+}
+
+function updateLvl(){
+  lvlPos = frameCount/30;
 }
