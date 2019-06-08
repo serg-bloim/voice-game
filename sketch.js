@@ -58,3 +58,7 @@ function updateCursor() {
   let newHeight = map(volume, 0, 1, -90, 90);
   block.pos.y = newHeight;
 }
+
+function touchStarted() {
+  getAudioContext().resume()
+}
