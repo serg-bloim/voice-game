@@ -4,6 +4,7 @@ var block={
     sizeY:10
 }
 var dimensions={width:500, height:500}
+var lvlPos = 0
 var mic;
 function setup() {
     createCanvas(dimensions.width, dimensions.height);
@@ -31,13 +32,29 @@ function drawCursor(){
     ellipse(block.pos.x, block.pos.y, block.sizeX, block.sizeY);
 }
 function drawBottom(){
+    stroke('#DEB887')
+    fill('#A52A2A')
+    strokeWeight(3)
 
+    beginShape()
+    var curLvl = 0;
+    for (x in lvl1.bottom){
+        var y = lvl1.bottom[x];
+        curLvl += y
+        vertex(x*10, curLvl*10);
+    }
+    endShape()
+    stroke(0)
+    strokeWeight(1)
 }
 
 function drawTop(){
+<<<<<<< HEAD
     
 }
 
 function updateCursor() {
+=======
+>>>>>>> e25e746fa0efdff37ee1d8d3c38fb21688698eef
 
 }
