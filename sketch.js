@@ -6,6 +6,7 @@ var block={
 var dimensions={width:500, height:500}
 var lvlPos = 0
 var mic;
+var lvl = lvl1;
 function setup() {
     createCanvas(dimensions.width, dimensions.height);
     mic = new p5.AudioIn();
@@ -18,6 +19,8 @@ function draw() {
     fill(255);
     rect(0,0,width, height);
     translate(width/2, height/2);
+    scale(1,-1)
+    scale(dimensions.width/200)
     if (mouseIsPressed) {
         fill(0);
       } else {
@@ -35,16 +38,23 @@ function drawCursor(){
 function drawBottom(){
     stroke('#DEB887')
     fill('#A52A2A')
-    strokeWeight(3)
-
+    strokeWeight(2)
+    // translate(0,-height/2);
+    translate(0,-100);
     beginShape()
-    var curLvl = 0;
-    for (x in lvl1.bottom){
-        var y = lvl1.bottom[x];
+    vertex(0,0)
+    var curLvl = 0.5;
+    var lastX = 0;
+    for (x in lvl.bottom){
+        lastX = x+1;
+        var y = lvl.bottom[x];
         curLvl += y
         vertex(x*10, curLvl*10);
     }
+    vertex(lastX*10, 0)
     endShape()
+    translate(0,100);
+    // translate(0,height/2);
     stroke(0)
     strokeWeight(1)
 }
