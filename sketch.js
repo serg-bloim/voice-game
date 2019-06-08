@@ -25,10 +25,11 @@ function draw() {
         fill(255);
       }
     //   ellipse(mouseX, mouseY, 80, 80);
-      updateCursor();
-      drawCursor()
+      
       drawBottom()
       drawTop()
+      updateCursor()
+      drawCursor()
 }
 function drawCursor(){
     
