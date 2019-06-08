@@ -11,8 +11,6 @@ function setup() {
     createCanvas(dimensions.width, dimensions.height);
     mic = new p5.AudioIn();
     mic.start();
-
-    alert(mic.getLevel());
 }
 
 function draw() {
@@ -27,11 +25,13 @@ function draw() {
         fill(255);
       }
     //   ellipse(mouseX, mouseY, 80, 80);
+      updateCursor();
       drawCursor()
       drawBottom()
       drawTop()
 }
 function drawCursor(){
+    
     fill('#fae')
     ellipse(block.pos.x, block.pos.y, block.sizeX, block.sizeY);
 }
@@ -60,5 +60,15 @@ function drawBottom(){
 }
 
 function drawTop(){
+    
+}
 
+function updateCursor() {
+  let volume = mic.getLevel();
+  let newHeight = map(volume, 0, 1, -90, 90);
+  block.pos.y = newHeight;
+}
+
+function touchStarted() {
+  getAudioContext().resume()
 }
