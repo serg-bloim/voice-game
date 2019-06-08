@@ -7,8 +7,10 @@ var dimensions={width:500, height:500}
 var mic;
 function setup() {
     createCanvas(dimensions.width, dimensions.height);
-    mic = new p5.AudioIn()
+    mic = new p5.AudioIn();
     mic.start();
+
+    alert(mic.getLevel());
 }
 
 function draw() {
@@ -29,7 +31,6 @@ function drawCursor(){
     fill('#fae')
     ellipse(block.pos.x, block.pos.y, block.sizeX, block.sizeY);
 }
-
 function drawBottom(){
 
 }
