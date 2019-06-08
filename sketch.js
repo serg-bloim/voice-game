@@ -12,6 +12,7 @@ function setup() {
     mic = new p5.AudioIn();
     mic.start();
     frameRate(30);
+    loadLevel(lvl1);
 }
 
 function draw() {
@@ -37,7 +38,7 @@ function drawCursor(){
     fill('#fae')
     ellipse(block.pos.x, block.pos.y, block.sizeX, block.sizeY);
 }
-function drawBottom(){
+function drawBorder(){
     stroke('#DEB887')
     fill('#A52A2A')
     strokeWeight(2)
@@ -46,20 +47,20 @@ function drawBottom(){
     beginShape()
     vertex(-110,0)
     vertex(-110,5)
-    var curLvl = 0.5;
     var lastX = 0;
-    // var arrStart = constrain(lvlPos-10, 0, lvl.length-1);
-    // var arrEnd = constrain(lvlPos+10, 0, lvl.length);
     var border = lvl.bottom;
-    var arrStart = 0;
-    var arrEnd = border.length;
-    var xStart = max(-lvlPos, -10)
+    // var arrStart = 0;
+    // var arrEnd = border.length;
+    var level = 0.5;
+    var offsetBackward = 1;
+    var offsetForward = 2;
+    var arrStart = constrain(floor(lvlPos)-10-offsetBackward, 0, border.length-1);
+    var arrEnd = constrain(floor(lvlPos)+10+offsetForward, 0, border.length);
     for (i = arrStart; i < arrEnd; i++){
         var x = i
         lastX = x+1;
         var y = border[x];
-        curLvl += y
-        vertex((x-lvlPos)*10, curLvl*10);
+        vertex((x-lvlPos)*10, (y+level)*10);
     }
     vertex(lastX*10, 5)
     vertex(110, 5)
@@ -69,6 +70,9 @@ function drawBottom(){
     // translate(0,height/2);
     stroke(0)
     strokeWeight(1)
+}
+function drawBottom(){
+  drawBorder();
 }
 
 function drawTop(){
@@ -86,5 +90,18 @@ function touchStarted() {
 }
 
 function updateLvl(){
-  lvlPos = frameCount/30;
+  lvlPos = frameCount/10;
+}
+function loadLevel(newLvl){
+  lvl.bottom = toHieghtMap(newLvl.bottom);
+  lvl.top = toHieghtMap(newLvl.top);
+}
+function toHieghtMap(arr){
+  var h = 0;
+  var heightMap = [];
+  for(x in arr){
+    h+=arr[x];
+    heightMap.push(h);
+  }
+  return heightMap;
 }
