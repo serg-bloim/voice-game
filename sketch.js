@@ -4,8 +4,11 @@ var block={
     sizeY:10
 }
 var dimensions={width:500, height:500}
+var mic;
 function setup() {
     createCanvas(dimensions.width, dimensions.height);
+    mic = new p5.AudioIn()
+    mic.start();
 }
 
 function draw() {
