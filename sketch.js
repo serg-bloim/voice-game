@@ -5,6 +5,8 @@ var block={
 }
 var dimensions={width:500, height:500}
 var lvlPos = 0
+var playing = true;
+var speed = 3;
 var mic;
 var lvl = lvl1;
 function setup() {
@@ -78,9 +80,14 @@ function updateCursor() {
 function touchStarted() {
   getAudioContext().resume()
 }
+function mouseClicked() {
+    playing = !playing;
+}
 
-function updateLvl(){
-  lvlPos = frameCount/10;
+function updateLvl() {
+  if (playing) {
+    lvlPos += speed / 30;
+  }
 }
 function loadLevel(newLvl){
   lvl.bottom = toHieghtMap(newLvl.bottom);
