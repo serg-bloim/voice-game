@@ -19,8 +19,18 @@ function draw() {
       }
     //   ellipse(mouseX, mouseY, 80, 80);
       drawCursor()
+      drawBottom()
+      drawTop()
 }
 function drawCursor(){
     fill('#fae')
     ellipse(block.pos.x, block.pos.y, block.sizeX, block.sizeY);
+}
+
+function drawBottom(){
+
+}
+
+function drawTop(){
+    
 }
