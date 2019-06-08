@@ -49,12 +49,9 @@ function drawBottom(){
 }
 
 function drawTop(){
-<<<<<<< HEAD
     
 }
 
 function updateCursor() {
-=======
->>>>>>> e25e746fa0efdff37ee1d8d3c38fb21688698eef
 
 }
