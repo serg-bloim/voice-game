@@ -9,6 +9,7 @@ var playing = true;
 var speed = 3;
 var mic;
 var lvl = lvl1;
+var useMouse = false;
 function setup() {
     createCanvas(dimensions.width, dimensions.height);
     mic = new p5.AudioIn();
@@ -73,6 +74,12 @@ function drawTop(){
 
 function updateCursor() {
   let volume = mic.getLevel();
+  if(useMouse){
+    var y = constrain(mouseY, 0, dimensions.height);
+    y = 1 - map(y, 0, dimensions.height, 0, 1);
+    volume = y;
+  }
+  console.log(volume);
   let newHeight = map(volume, 0, 1, -90, 90);
   block.pos.y = newHeight;
 }
@@ -101,4 +108,9 @@ function toHieghtMap(arr){
     heightMap.push(h);
   }
   return heightMap;
+}
+function keyPressed() {
+  if (keyCode === SHIFT) {
+    useMouse = !useMouse;
+  }
 }
