@@ -22,6 +22,7 @@ function draw() {
         fill(255);
       }
     //   ellipse(mouseX, mouseY, 80, 80);
+      updateCursor();
       drawCursor()
       drawBottom()
       drawTop()
@@ -55,6 +56,5 @@ function drawTop(){
 function updateCursor() {
   let volume = mic.getLevel();
   let newHeight = map(volume, 0, 1, -90, 90);
-
   block.pos.y = newHeight;
 }
